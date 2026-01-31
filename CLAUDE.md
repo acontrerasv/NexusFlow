@@ -15,17 +15,16 @@ This repository contains product documentation, strategy, PRDs, and AI-powered t
 ## Repository Structure
 
 ```
-.claude/                        # AI configuration
-  agents/                       # Agent definitions
-  commands/                     # Custom commands
-  skills/                       # Specialized skills
-context/                        # Business context
-  docs/                         # Core docs, conventions, business context
-  data/                         # Analytics, churn analysis, metrics
-  strategy/                     # Vision, roadmap, OKRs
-  prds/                         # Product requirements (by quarter)
-  tech/                         # Architecture, services, diagrams
-  templates/                    # PRD and document templates
+NexusFlow/
+├── context/
+│   ├── data/          # Business metrics, churn analysis, dashboards
+│   ├── docs/          # Extended documentation, conventions, workflows
+│   ├── prds/          # Product Requirements Documents (by quarter)
+│   ├── strategy/      # OKRs, roadmaps, vision
+│   ├── tech/          # Architecture rules, services, diagrams
+│   └── templates/     # PRD templates and guides
+├── .claude/           # Agents, commands, skills
+└── CLAUDE.md          # This file
 ```
 
 ## How
