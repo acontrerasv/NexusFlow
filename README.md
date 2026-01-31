@@ -1,6 +1,8 @@
 # NexusFlow Product Repository
 
-> **Este repositorio es un proyecto DEMO creado por Ariel Contreras, CPO en [Leadsales.io](https://leadsales.io), con el propósito de mostrar cómo utiliza Claude Code en su flujo de trabajo diario.** NexusFlow no es un producto real: es una estructura de referencia que ilustra la forma en que se organiza la documentación de producto, PRDs, estrategia, datos y herramientas de IA dentro de un repositorio. Todos los datos, métricas, nombres y cifras que aparecen son completamente sintéticos. Este estándar de trabajo es el que se aplica en todo el equipo de producto e ingeniería de Leadsales, y sirve como ejemplo práctico de cómo estructurar un repositorio de producto para aprovechar al máximo las capacidades de Claude Code como copiloto de desarrollo y gestión de producto.
+> **Este repositorio es un proyecto DEMO creado por Ariel Contreras, Head of Product en [Leadsales.io](https://leadsales.io), con el propósito de mostrar cómo utiliza Claude Code en su flujo de trabajo diario.** NexusFlow no es un producto real: es una estructura de referencia que ilustra la forma en que se organiza la documentación de producto, PRDs, estrategia, datos y herramientas de IA dentro de un repositorio. Todos los datos, métricas, nombres y cifras que aparecen son completamente sintéticos. Este estándar de trabajo es el que se aplica en todo el equipo de producto e ingeniería de Leadsales, y sirve como ejemplo práctico de cómo estructurar un repositorio de producto para aprovechar al máximo las capacidades de Claude Code como copiloto de desarrollo y gestión de producto.
+
+Me encuentran como @acontrerasv en [X](https://x.com/acontrerasv) y [LinkedIn](https://www.linkedin.com/in/acontrerasv/).
 
 > **NexusFlow** - AI-Powered Sales Automation Platform for B2B Teams in EMEA
 
