@@ -1,0 +1,51 @@
+account_id,account_name,plan,mrr,churn_date,churn_reason,tenure_months,industry,company_size,region,last_login_days,workflows_created,workflow_runs,crm_connected,support_tickets
+ACC-001,TechStart GmbH,starter,79,2026-01-05,adoption,3,saas,12,dach,45,1,23,false,0
+ACC-002,Nordic Solutions AB,professional,199,2026-01-08,feature_gaps,8,technology,45,nordics,12,4,156,true,2
+ACC-003,CloudOps Ltd,enterprise,499,2026-01-10,integration,14,financial,320,uk,8,12,890,true,7
+ACC-004,DataFlow BV,starter,79,2026-01-12,pricing,2,other,8,benelux,60,0,0,false,1
+ACC-005,SalesForce Pro,professional,199,2026-01-15,competitor,11,saas,65,dach,5,8,445,true,3
+ACC-006,Finance Hub AG,enterprise,499,2026-01-18,integration,9,financial,450,dach,15,6,234,true,12
+ACC-007,Marketing Plus,starter,79,2026-01-20,adoption,1,marketing,15,france,90,0,0,false,0
+ACC-008,TechVentures,professional,199,2026-01-22,support,7,technology,55,uk,10,5,312,true,8
+ACC-009,Global Systems,enterprise,499,2026-01-25,feature_gaps,16,manufacturing,680,dach,3,15,1245,true,5
+ACC-010,StartupHub,starter,79,2026-01-28,company_closed,4,saas,6,nordics,180,2,45,false,0
+ACC-011,Sales Excellence,professional,199,2026-01-30,adoption,5,professional_services,38,benelux,25,3,89,true,2
+ACC-012,Enterprise Corp,enterprise,499,2026-02-02,integration,12,financial,520,uk,7,9,567,true,15
+ACC-013,Digital Works,starter,79,2026-02-05,pricing,3,technology,18,france,35,2,78,false,1
+ACC-014,Nordic Tech AS,professional,199,2026-02-08,feature_gaps,9,saas,72,nordics,8,6,423,true,4
+ACC-015,ManufactureX,enterprise,499,2026-02-10,support,11,manufacturing,380,dach,12,7,345,true,9
+ACC-016,ConsultPro,starter,79,2026-02-12,adoption,2,professional_services,22,uk,55,1,12,false,0
+ACC-017,TechScale,professional,199,2026-02-15,competitor,8,saas,48,benelux,6,7,534,true,2
+ACC-018,FinServices AG,enterprise,499,2026-02-18,integration,15,financial,620,dach,4,11,892,true,11
+ACC-019,GrowthStart,starter,79,2026-02-20,company_closed,5,saas,4,france,200,1,23,false,0
+ACC-020,SalesTeam Pro,professional,199,2026-02-22,adoption,4,professional_services,35,nordics,30,2,67,true,1
+ACC-021,BigCorp International,enterprise,499,2026-02-25,feature_gaps,18,manufacturing,750,uk,5,14,1567,true,6
+ACC-022,StartupFlow,starter,79,2026-02-28,pricing,2,technology,10,dach,45,1,34,false,2
+ACC-023,DataServices,professional,199,2026-03-02,support,6,technology,58,benelux,15,4,234,true,7
+ACC-024,Enterprise Solutions,enterprise,499,2026-03-05,integration,13,financial,490,dach,9,8,678,true,14
+ACC-025,QuickStart Ltd,starter,79,2026-03-08,adoption,1,other,8,uk,75,0,0,false,0
+ACC-026,ScaleUp AB,professional,199,2026-03-10,feature_gaps,10,saas,82,nordics,7,9,612,true,3
+ACC-027,Industrial Tech,enterprise,499,2026-03-12,support,17,manufacturing,580,dach,11,10,789,true,10
+ACC-028,SmallBiz Pro,starter,79,2026-03-15,pricing,3,professional_services,12,france,40,2,56,false,1
+ACC-029,TechGrowth,professional,199,2026-03-18,competitor,7,saas,42,benelux,8,5,378,true,2
+ACC-030,FinanceMax,enterprise,499,2026-03-20,integration,10,financial,410,uk,6,7,456,true,8
+ACC-031,StartupNow,starter,79,2026-03-22,adoption,2,technology,14,dach,50,1,23,false,0
+ACC-032,SalesOps,professional,199,2026-03-25,adoption,5,professional_services,48,nordics,20,3,145,true,1
+ACC-033,GlobalTech Corp,enterprise,499,2026-03-28,feature_gaps,14,technology,720,dach,4,13,1123,true,4
+ACC-034,MicroBiz,starter,79,2026-03-30,company_closed,4,other,5,france,150,0,0,false,0
+ACC-035,ProSales UK,professional,199,2026-01-03,support,8,professional_services,55,uk,12,6,289,true,6
+ACC-036,TechInnovate,enterprise,499,2026-01-07,integration,11,saas,340,benelux,10,8,567,true,9
+ACC-037,FastGrow,starter,79,2026-01-11,pricing,2,technology,16,dach,42,1,45,false,1
+ACC-038,SalesMax,professional,199,2026-01-16,feature_gaps,9,professional_services,62,nordics,9,7,423,true,3
+ACC-039,Enterprise Plus,enterprise,499,2026-01-21,support,16,financial,560,uk,7,11,834,true,11
+ACC-040,QuickBiz,starter,79,2026-01-26,adoption,1,other,9,france,80,0,0,false,0
+ACC-041,GrowthPro,professional,199,2026-02-01,competitor,7,saas,52,dach,6,5,345,true,2
+ACC-042,MegaCorp,enterprise,499,2026-02-06,integration,13,manufacturing,680,benelux,8,9,712,true,13
+ACC-043,StartBiz,starter,79,2026-02-11,pricing,3,technology,11,nordics,38,2,67,false,1
+ACC-044,TechTeam,professional,199,2026-02-16,adoption,4,technology,44,uk,28,3,123,true,1
+ACC-045,Finance Corp,enterprise,499,2026-02-21,feature_gaps,15,financial,520,dach,5,12,956,true,5
+ACC-046,MicroStart,starter,79,2026-02-26,company_closed,5,saas,3,france,180,1,12,false,0
+ACC-047,SalesForce Plus,professional,199,2026-03-03,support,6,professional_services,58,benelux,14,4,267,true,5
+ACC-048,Enterprise Max,enterprise,499,2026-03-08,integration,12,technology,450,nordics,9,8,589,true,10
+ACC-049,QuickGrow,starter,79,2026-03-13,adoption,2,other,13,dach,55,1,34,false,0
+ACC-050,DataPro,professional,199,2026-03-18,feature_gaps,8,saas,68,uk,8,6,412,true,4

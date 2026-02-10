@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexusFlow KPI Dashboard - Q1 2026</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            color: #fff;
+            padding: 20px;
+        }
+
+        .dashboard-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+        }
+
+        .dashboard-header h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(90deg, #00d4ff, #7c3aed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+
+        .dashboard-header p {
+            color: #a0aec0;
+            font-size: 1.1rem;
+        }
+
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .kpi-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .kpi-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .kpi-card.critical {
+            border-color: #f56565;
+            background: rgba(245, 101, 101, 0.1);
+        }
+
+        .kpi-card.warning {
+            border-color: #ecc94b;
+            background: rgba(236, 201, 75, 0.1);
+        }
+
+        .kpi-card.success {
+            border-color: #48bb78;
+            background: rgba(72, 187, 120, 0.1);
+        }
+
+        .kpi-label {
+            font-size: 0.875rem;
+            color: #a0aec0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .kpi-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .kpi-target {
+            font-size: 0.875rem;
+            color: #718096;
+        }
+
+        .kpi-target span {
+            color: #a0aec0;
+        }
+
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 1200px) {
+            .charts-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .chart-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .chart-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 20px;
+            color: #e2e8f0;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 300px;
+        }
+
+        .funnel-container {
+            grid-column: span 2;
+        }
+
+        @media (max-width: 1200px) {
+            .funnel-container {
+                grid-column: span 1;
+            }
+        }
+
+        .funnel {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .funnel-step {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            border-radius: 8px;
+            transition: transform 0.3s;
+            position: relative;
+        }
+
+        .funnel-step:hover {
+            transform: scale(1.02);
+        }
+
+        .funnel-step-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            padding: 0 20px;
+        }
+
+        .funnel-step-name {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .funnel-step-value {
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .funnel-step-dropoff {
+            position: absolute;
+            right: -80px;
+            font-size: 0.75rem;
+            color: #f56565;
+            font-weight: 600;
+        }
+
+        .insights-section {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 20px;
+        }
+
+        .insights-section h3 {
+            font-size: 1.25rem;
+            margin-bottom: 16px;
+            color: #e2e8f0;
+        }
+
+        .insight-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .insight-item:last-child {
+            border-bottom: none;
+        }
+
+        .insight-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+
+        .insight-icon.critical { background: rgba(245, 101, 101, 0.2); }
+        .insight-icon.warning { background: rgba(236, 201, 75, 0.2); }
+        .insight-icon.info { background: rgba(66, 153, 225, 0.2); }
+
+        .insight-text {
+            flex: 1;
+        }
+
+        .insight-text strong {
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .insight-text p {
+            font-size: 0.875rem;
+            color: #a0aec0;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #718096;
+            font-size: 0.875rem;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-header">
+        <h1>NexusFlow KPI Dashboard</h1>
+        <p>Q1 2026 Performance Metrics | Last Updated: March 2026</p>
+    </div>
+
+    <!-- KPI Cards -->
+    <div class="kpi-grid">
+        <div class="kpi-card success">
+            <div class="kpi-label">Annual Recurring Revenue</div>
+            <div class="kpi-value" style="color: #48bb78;">€8.2M</div>
+            <div class="kpi-target">Target: <span>€12M</span> | +10.8% QoQ</div>
+        </div>
+        <div class="kpi-card warning">
+            <div class="kpi-label">Net Revenue Retention</div>
+            <div class="kpi-value" style="color: #ecc94b;">108%</div>
+            <div class="kpi-target">Target: <span>125%</span> | Below target</div>
+        </div>
+        <div class="kpi-card critical">
+            <div class="kpi-label">Enterprise Churn</div>
+            <div class="kpi-value" style="color: #f56565;">12.3%</div>
+            <div class="kpi-target">Target: <span>2.8%</span> | Critical</div>
+        </div>
+        <div class="kpi-card warning">
+            <div class="kpi-label">Activation Rate</div>
+            <div class="kpi-value" style="color: #ecc94b;">31%</div>
+            <div class="kpi-target">Target: <span>60%</span> | Needs improvement</div>
+        </div>
+    </div>
+
+    <!-- Charts Grid -->
+    <div class="charts-grid">
+        <!-- ARR Trend -->
+        <div class="chart-card">
+            <h3>ARR Trend (15 Months)</h3>
+            <div class="chart-container">
+                <canvas id="arrChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Churn by Plan -->
+        <div class="chart-card">
+            <h3>Monthly Churn by Plan Tier</h3>
+            <div class="chart-container">
+                <canvas id="churnChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Churn Reasons Pie -->
+        <div class="chart-card">
+            <h3>Churn Reasons Distribution</h3>
+            <div class="chart-container">
+                <canvas id="churnReasonsChart"></canvas>
+            </div>
+        </div>
+
+        <!-- MRR Components -->
+        <div class="chart-card">
+            <h3>MRR Movement</h3>
+            <div class="chart-container">
+                <canvas id="mrrChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Activation Funnel -->
+        <div class="chart-card funnel-container">
+            <h3>Activation Funnel</h3>
+            <div class="funnel">
+                <div class="funnel-step" style="width: 100%; background: linear-gradient(90deg, #4299e1, #667eea);">
+                    <div class="funnel-step-content">
+                        <span class="funnel-step-name">1. Signup</span>
+                        <span class="funnel-step-value">100%</span>
+                    </div>
+                </div>
+                <div class="funnel-step" style="width: 88%; background: linear-gradient(90deg, #48bb78, #38a169);">
+                    <div class="funnel-step-content">
+                        <span class="funnel-step-name">2. Completed Profile</span>
+                        <span class="funnel-step-value">88%</span>
+                    </div>
+                    <span class="funnel-step-dropoff">-12%</span>
+                </div>
+                <div class="funnel-step" style="width: 78%; background: linear-gradient(90deg, #ecc94b, #d69e2e);">
+                    <div class="funnel-step-content">
+                        <span class="funnel-step-name">3. Started Onboarding</span>
+                        <span class="funnel-step-value">78%</span>
+                    </div>
+                    <span class="funnel-step-dropoff">-10%</span>
+                </div>
+                <div class="funnel-step" style="width: 52%; background: linear-gradient(90deg, #ed8936, #dd6b20);">
+                    <div class="funnel-step-content">
+                        <span class="funnel-step-name">4. Connected CRM</span>
+                        <span class="funnel-step-value">52%</span>
+                    </div>
+                    <span class="funnel-step-dropoff">-26%</span>
+                </div>
+                <div class="funnel-step" style="width: 45%; background: linear-gradient(90deg, #f56565, #e53e3e);">
+                    <div class="funnel-step-content">
+                        <span class="funnel-step-name">5. Created Workflow</span>
+                        <span class="funnel-step-value">45%</span>
+                    </div>
+                    <span class="funnel-step-dropoff">-7%</span>
+                </div>
+                <div class="funnel-step" style="width: 38%; background: linear-gradient(90deg, #9f7aea, #805ad5);">
+                    <div class="funnel-step-content">
+                        <span class="funnel-step-name">6. First Workflow Run</span>
+                        <span class="funnel-step-value">38%</span>
+                    </div>
+                    <span class="funnel-step-dropoff">-7%</span>
+                </div>
+                <div class="funnel-step" style="width: 31%; background: linear-gradient(90deg, #667eea, #5a67d8);">
+                    <div class="funnel-step-content">
+                        <span class="funnel-step-name">7. Activated (3+ runs)</span>
+                        <span class="funnel-step-value">31%</span>
+                    </div>
+                    <span class="funnel-step-dropoff">-7%</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Key Insights -->
+    <div class="insights-section">
+        <h3>Key Insights & Recommended Actions</h3>
+        <div class="insight-item">
+            <div class="insight-icon critical">!</div>
+            <div class="insight-text">
+                <strong>Enterprise Churn Crisis</strong>
+                <p>12.3% monthly churn (vs 2.8% target). Root cause: Integration complexity. 28% of churned accounts cite integration issues. Recommend: CRM Integration Wizard feature.</p>
+            </div>
+        </div>
+        <div class="insight-item">
+            <div class="insight-icon warning">!</div>
+            <div class="insight-text">
+                <strong>CRM Connection Barrier</strong>
+                <p>26% of users drop off at CRM connection step. OAuth completion rate only 56%. Recommend: "Skip for now" option + simplified OAuth flow.</p>
+            </div>
+        </div>
+        <div class="insight-item">
+            <div class="insight-icon info">i</div>
+            <div class="insight-text">
+                <strong>Time to First Value</strong>
+                <p>Current TTFV is 12 days. Target: 2 days. Users who activate in first 24h have 85% success rate vs 35% for those who wait >48h.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>NexusFlow Analytics Dashboard | Data as of Q1 2026 | Generated for Product Strategy Review</p>
+    </div>
+
+    <script>
+        // Chart.js defaults for dark theme
+        Chart.defaults.color = '#a0aec0';
+        Chart.defaults.borderColor = 'rgba(255, 255, 255, 0.1)';
+
+        // ARR Trend Chart
+        const arrCtx = document.getElementById('arrChart').getContext('2d');
+        new Chart(arrCtx, {
+            type: 'line',
+            data: {
+                labels: ['Jan 25', 'Feb 25', 'Mar 25', 'Apr 25', 'May 25', 'Jun 25', 'Jul 25', 'Aug 25', 'Sep 25', 'Oct 25', 'Nov 25', 'Dec 25', 'Jan 26', 'Feb 26', 'Mar 26'],
+                datasets: [{
+                    label: 'ARR (€M)',
+                    data: [5.10, 5.28, 5.46, 5.64, 5.82, 6.00, 6.24, 6.48, 6.72, 6.96, 7.20, 7.44, 7.80, 8.04, 8.28],
+                    borderColor: '#4299e1',
+                    backgroundColor: 'rgba(66, 153, 225, 0.1)',
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 4,
+                    pointBackgroundColor: '#4299e1'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return '€' + context.raw.toFixed(2) + 'M';
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        min: 4,
+                        ticks: {
+                            callback: function(value) {
+                                return '€' + value + 'M';
+                            }
+                        },
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.05)'
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        }
+                    }
+                }
+            }
+        });
+
+        // Churn by Plan Chart
+        const churnCtx = document.getElementById('churnChart').getContext('2d');
+        new Chart(churnCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Starter', 'Professional', 'Enterprise'],
+                datasets: [{
+                    label: 'Monthly Churn Rate',
+                    data: [8.2, 4.5, 12.3],
+                    backgroundColor: [
+                        'rgba(236, 201, 75, 0.8)',
+                        'rgba(72, 187, 120, 0.8)',
+                        'rgba(245, 101, 101, 0.8)'
+                    ],
+                    borderColor: [
+                        '#ecc94b',
+                        '#48bb78',
+                        '#f56565'
+                    ],
+                    borderWidth: 2,
+                    borderRadius: 8
+                }, {
+                    label: 'Target',
+                    data: [5.0, 3.0, 2.8],
+                    backgroundColor: 'rgba(160, 174, 192, 0.3)',
+                    borderColor: '#a0aec0',
+                    borderWidth: 2,
+                    borderRadius: 8
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'top'
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.dataset.label + ': ' + context.raw + '%';
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 15,
+                        ticks: {
+                            callback: function(value) {
+                                return value + '%';
+                            }
+                        },
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.05)'
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        }
+                    }
+                }
+            }
+        });
+
+        // Churn Reasons Pie Chart
+        const reasonsCtx = document.getElementById('churnReasonsChart').getContext('2d');
+        new Chart(reasonsCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Integration Issues', 'Feature Gaps', 'Support Quality', 'Low Adoption', 'Pricing'],
+                datasets: [{
+                    data: [28, 25, 22, 19, 16],
+                    backgroundColor: [
+                        'rgba(245, 101, 101, 0.8)',
+                        'rgba(237, 137, 54, 0.8)',
+                        'rgba(236, 201, 75, 0.8)',
+                        'rgba(72, 187, 120, 0.8)',
+                        'rgba(66, 153, 225, 0.8)'
+                    ],
+                    borderColor: [
+                        '#f56565',
+                        '#ed8936',
+                        '#ecc94b',
+                        '#48bb78',
+                        '#4299e1'
+                    ],
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'right',
+                        labels: {
+                            padding: 15,
+                            usePointStyle: true
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.label + ': ' + context.raw + '%';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // MRR Movement Chart
+        const mrrCtx = document.getElementById('mrrChart').getContext('2d');
+        new Chart(mrrCtx, {
+            type: 'bar',
+            data: {
+                labels: ['New MRR', 'Expansion', 'Contraction', 'Churned', 'Net New'],
+                datasets: [{
+                    label: 'MRR Movement (€K)',
+                    data: [52.4, 28.3, -12.2, -39.6, 29.0],
+                    backgroundColor: [
+                        'rgba(72, 187, 120, 0.8)',
+                        'rgba(66, 153, 225, 0.8)',
+                        'rgba(236, 201, 75, 0.8)',
+                        'rgba(245, 101, 101, 0.8)',
+                        'rgba(159, 122, 234, 0.8)'
+                    ],
+                    borderColor: [
+                        '#48bb78',
+                        '#4299e1',
+                        '#ecc94b',
+                        '#f56565',
+                        '#9f7aea'
+                    ],
+                    borderWidth: 2,
+                    borderRadius: 8
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return '€' + context.raw + 'K';
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        ticks: {
+                            callback: function(value) {
+                                return '€' + value + 'K';
+                            }
+                        },
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.05)'
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

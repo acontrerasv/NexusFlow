@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexusFlow Roadmap Q2 2026</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: #F9FAFB;
+            color: #111827;
+            padding: 32px;
+        }
+        .container { max-width: 1400px; margin: 0 auto; }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+        }
+        .header h1 { font-size: 28px; font-weight: 700; }
+        .header .meta { color: #6B7280; font-size: 14px; }
+        .legend {
+            display: flex;
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+        }
+        .legend-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 3px;
+        }
+        .roadmap {
+            display: grid;
+            grid-template-columns: 180px repeat(3, 1fr);
+            gap: 2px;
+            background: #E5E7EB;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .roadmap-header {
+            background: #1F2937;
+            color: white;
+            padding: 16px;
+            font-weight: 600;
+            text-align: center;
+        }
+        .team-label {
+            background: #F3F4F6;
+            padding: 16px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+        }
+        .month-col {
+            background: white;
+            padding: 12px;
+            min-height: 120px;
+        }
+        .initiative {
+            padding: 10px 12px;
+            border-radius: 6px;
+            margin-bottom: 8px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: transform 0.1s;
+        }
+        .initiative:hover { transform: translateX(2px); }
+        .initiative .priority {
+            font-size: 10px;
+            opacity: 0.8;
+            display: block;
+            margin-top: 4px;
+        }
+        .p0 { background: #FEE2E2; color: #991B1B; border-left: 3px solid #EF4444; }
+        .p1 { background: #FEF3C7; color: #92400E; border-left: 3px solid #F59E0B; }
+        .p2 { background: #DBEAFE; color: #1E40AF; border-left: 3px solid #3B82F6; }
+        .summary {
+            margin-top: 32px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+        .summary-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+        .summary-card h3 {
+            font-size: 14px;
+            color: #6B7280;
+            margin-bottom: 8px;
+        }
+        .summary-card .value {
+            font-size: 28px;
+            font-weight: 700;
+        }
+        .summary-card .detail {
+            font-size: 12px;
+            color: #6B7280;
+            margin-top: 4px;
+        }
+        .milestones {
+            margin-top: 32px;
+        }
+        .milestones h2 {
+            font-size: 18px;
+            margin-bottom: 16px;
+        }
+        .milestone-row {
+            display: flex;
+            gap: 24px;
+            margin-bottom: 16px;
+        }
+        .milestone {
+            background: white;
+            padding: 16px 20px;
+            border-radius: 8px;
+            flex: 1;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+        .milestone-date {
+            font-size: 12px;
+            color: #6B7280;
+            margin-bottom: 4px;
+        }
+        .milestone-title {
+            font-weight: 600;
+        }
+        .milestone-desc {
+            font-size: 13px;
+            color: #6B7280;
+            margin-top: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Product Roadmap Q2 2026</h1>
+            <div class="meta">Last updated: January 2026</div>
+        </div>
+
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-dot" style="background: #EF4444;"></div>
+                <span>P0 - Critical</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-dot" style="background: #F59E0B;"></div>
+                <span>P1 - High</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-dot" style="background: #3B82F6;"></div>
+                <span>P2 - Medium</span>
+            </div>
+        </div>
+
+        <div class="roadmap">
+            <div class="roadmap-header">Team</div>
+            <div class="roadmap-header">April</div>
+            <div class="roadmap-header">May</div>
+            <div class="roadmap-header">June</div>
+
+            <div class="team-label">Activation</div>
+            <div class="month-col">
+                <div class="initiative p0">
+                    Skip CRM Option
+                    <span class="priority">P0 - Activation blocker</span>
+                </div>
+            </div>
+            <div class="month-col">
+                <div class="initiative p0">
+                    Guided Onboarding v2
+                    <span class="priority">P0 - TTFV reduction</span>
+                </div>
+                <div class="initiative p1">
+                    AI Onboarding Path
+                    <span class="priority">P1 - AI adoption</span>
+                </div>
+            </div>
+            <div class="month-col"></div>
+
+            <div class="team-label">Retention</div>
+            <div class="month-col">
+                <div class="initiative p1">
+                    Usage Alerts
+                    <span class="priority">P1 - Proactive retention</span>
+                </div>
+            </div>
+            <div class="month-col"></div>
+            <div class="month-col">
+                <div class="initiative p2">
+                    Health Scoring v2
+                    <span class="priority">P2 - At-risk detection</span>
+                </div>
+            </div>
+
+            <div class="team-label">Integration</div>
+            <div class="month-col">
+                <div class="initiative p0">
+                    OAuth Flow Redesign
+                    <span class="priority">P0 - CRM drop-off</span>
+                </div>
+            </div>
+            <div class="month-col">
+                <div class="initiative p1">
+                    CRM Sync v2 (Beta)
+                    <span class="priority">P1 - Integration churn</span>
+                </div>
+            </div>
+            <div class="month-col">
+                <div class="initiative p0">
+                    CRM Sync v2 (GA)
+                    <span class="priority">P0 - Enterprise priority</span>
+                </div>
+            </div>
+
+            <div class="team-label">Engagement</div>
+            <div class="month-col"></div>
+            <div class="month-col">
+                <div class="initiative p0">
+                    AI Workflow Creation
+                    <span class="priority">P0 - Differentiation</span>
+                </div>
+            </div>
+            <div class="month-col">
+                <div class="initiative p1">
+                    AI Everywhere
+                    <span class="priority">P1 - AI adoption</span>
+                </div>
+                <div class="initiative p1">
+                    AI Workflow Templates
+                    <span class="priority">P1 - Easy entry</span>
+                </div>
+                <div class="initiative p1">
+                    Workflow Builder v2
+                    <span class="priority">P1 - UX fixes</span>
+                </div>
+            </div>
+
+            <div class="team-label">Platform</div>
+            <div class="month-col">
+                <div class="initiative p1">
+                    Dashboard Loading States
+                    <span class="priority">P1 - Quick win</span>
+                </div>
+                <div class="initiative p1">
+                    Error Messages
+                    <span class="priority">P1 - Support reduction</span>
+                </div>
+            </div>
+            <div class="month-col">
+                <div class="initiative p0">
+                    SAML SSO
+                    <span class="priority">P0 - Enterprise blocker</span>
+                </div>
+            </div>
+            <div class="month-col">
+                <div class="initiative p0">
+                    Audit Logs
+                    <span class="priority">P0 - Enterprise compliance</span>
+                </div>
+                <div class="initiative p2">
+                    Business Impact Dashboard
+                    <span class="priority">P2 - Value demonstration</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="summary">
+            <div class="summary-card">
+                <h3>Total Initiatives</h3>
+                <div class="value">18</div>
+                <div class="detail">Across 5 teams</div>
+            </div>
+            <div class="summary-card">
+                <h3>P0 Critical</h3>
+                <div class="value">7</div>
+                <div class="detail">Must ship on time</div>
+            </div>
+            <div class="summary-card">
+                <h3>Enterprise Focus</h3>
+                <div class="value">35%</div>
+                <div class="detail">Of engineering capacity</div>
+            </div>
+            <div class="summary-card">
+                <h3>AI Initiatives</h3>
+                <div class="value">5</div>
+                <div class="detail">Differentiation plays</div>
+            </div>
+        </div>
+
+        <div class="milestones">
+            <h2>Key Milestones</h2>
+            <div class="milestone-row">
+                <div class="milestone">
+                    <div class="milestone-date">April 15</div>
+                    <div class="milestone-title">OAuth Flow v2 Launch</div>
+                    <div class="milestone-desc">Simplified CRM connection reducing drop-off by 50%</div>
+                </div>
+                <div class="milestone">
+                    <div class="milestone-date">May 1</div>
+                    <div class="milestone-title">Enterprise Support 24/7</div>
+                    <div class="milestone-desc">Round-the-clock support for enterprise customers</div>
+                </div>
+                <div class="milestone">
+                    <div class="milestone-date">May 15</div>
+                    <div class="milestone-title">SAML SSO GA</div>
+                    <div class="milestone-desc">Enterprise authentication ready</div>
+                </div>
+            </div>
+            <div class="milestone-row">
+                <div class="milestone">
+                    <div class="milestone-date">May 30</div>
+                    <div class="milestone-title">AI Workflow Creation Beta</div>
+                    <div class="milestone-desc">Create workflows by describing what you want</div>
+                </div>
+                <div class="milestone">
+                    <div class="milestone-date">June 15</div>
+                    <div class="milestone-title">CRM Sync v2 GA</div>
+                    <div class="milestone-desc">Rebuilt integration reducing churn</div>
+                </div>
+                <div class="milestone">
+                    <div class="milestone-date">June 30</div>
+                    <div class="milestone-title">Q2 Complete</div>
+                    <div class="milestone-desc">All P0 initiatives shipped</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

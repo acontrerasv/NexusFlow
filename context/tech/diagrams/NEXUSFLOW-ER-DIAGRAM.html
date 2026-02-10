@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexusFlow Entity Relationship Diagram</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: #1a1a2e;
+            color: #eee;
+            padding: 32px;
+            min-height: 100vh;
+        }
+        .container { max-width: 1600px; margin: 0 auto; }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .header h1 { font-size: 32px; font-weight: 700; margin-bottom: 8px; }
+        .header .subtitle { color: #888; font-size: 14px; }
+        .diagram {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            justify-content: center;
+        }
+        .entity {
+            background: #16213e;
+            border-radius: 12px;
+            width: 280px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+        .entity-header {
+            padding: 16px;
+            font-weight: 600;
+            font-size: 16px;
+            text-align: center;
+        }
+        .entity-header.core { background: #e94560; }
+        .entity-header.workflow { background: #0f3460; }
+        .entity-header.integration { background: #533483; }
+        .entity-header.analytics { background: #16a085; }
+        .entity-body { padding: 16px; }
+        .field {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #1a1a2e;
+            font-size: 13px;
+        }
+        .field:last-child { border-bottom: none; }
+        .field-name { color: #eee; }
+        .field-type { color: #888; font-family: monospace; }
+        .pk { color: #f1c40f; }
+        .fk { color: #3498db; }
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            margin-top: 40px;
+            padding: 20px;
+            background: #16213e;
+            border-radius: 8px;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+        }
+        .legend-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+        }
+        .relationships {
+            margin-top: 40px;
+            background: #16213e;
+            border-radius: 12px;
+            padding: 24px;
+        }
+        .relationships h2 {
+            margin-bottom: 16px;
+            font-size: 18px;
+        }
+        .relationship {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 16px;
+            padding: 12px 0;
+            border-bottom: 1px solid #1a1a2e;
+            font-size: 13px;
+        }
+        .relationship:last-child { border-bottom: none; }
+        .rel-entity { font-weight: 500; }
+        .rel-type { color: #888; text-align: center; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>NexusFlow Entity Relationship Diagram</h1>
+            <div class="subtitle">Database Schema Overview • Last Updated: January 2026</div>
+        </div>
+
+        <div class="diagram">
+            <!-- Core Entities -->
+            <div class="entity">
+                <div class="entity-header core">organizations</div>
+                <div class="entity-body">
+                    <div class="field"><span class="field-name pk">id</span><span class="field-type">uuid PK</span></div>
+                    <div class="field"><span class="field-name">name</span><span class="field-type">varchar(255)</span></div>
+                    <div class="field"><span class="field-name">slug</span><span class="field-type">varchar(100)</span></div>
+                    <div class="field"><span class="field-name">plan_id</span><span class="field-type">uuid FK</span></div>
+                    <div class="field"><span class="field-name">settings</span><span class="field-type">jsonb</span></div>
+                    <div class="field"><span class="field-name">created_at</span><span class="field-type">timestamp</span></div>
+                    <div class="field"><span class="field-name">updated_at</span><span class="field-type">timestamp</span></div>
+                </div>
+            </div>
+
+            <div class="entity">
+                <div class="entity-header core">users</div>
+                <div class="entity-body">
+                    <div class="field"><span class="field-name pk">id</span><span class="field-type">uuid PK</span></div>
+                    <div class="field"><span class="field-name fk">organization_id</span><span class="field-type">uuid FK</span></div>
+                    <div class="field"><span class="field-name">email</span><span class="field-type">varchar(255)</span></div>
+                    <div class="field"><span class="field-name">name</span><span class="field-type">varchar(255)</span></div>
+                    <div class="field"><span class="field-name">role</span><span class="field-type">enum</span></div>
+                    <div class="field"><span class="field-name">settings</span><span class="field-type">jsonb</span></div>
+                    <div class="field"><span class="field-name">last_login_at</span><span class="field-type">timestamp</span></div>
+                </div>
+            </div>
+
+            <div class="entity">
+                <div class="entity-header core">contacts</div>
+                <div class="entity-body">
+                    <div class="field"><span class="field-name pk">id</span><span class="field-type">uuid PK</span></div>
+                    <div class="field"><span class="field-name fk">organization_id</span><span class="field-type">uuid FK</span></div>
+                    <div class="field"><span class="field-name">email</span><span class="field-type">varchar(255)</span></div>
+                    <div class="field"><span class="field-name">first_name</span><span class="field-type">varchar(100)</span></div>
+                    <div class="field"><span class="field-name">last_name</span><span class="field-type">varchar(100)</span></div>
+                    <div class="field"><span class="field-name">company</span><span class="field-type">varchar(255)</span></div>
+                    <div class="field"><span class="field-name">custom_fields</span><span class="field-type">jsonb</span></div>
+                </div>
+            </div>
+
+            <!-- Workflow Entities -->
+            <div class="entity">
+                <div class="entity-header workflow">workflows</div>
+                <div class="entity-body">
+                    <div class="field"><span class="field-name pk">id</span><span class="field-type">uuid PK</span></div>
+                    <div class="field"><span class="field-name fk">organization_id</span><span class="field-type">uuid FK</span></div>
+                    <div class="field"><span class="field-name fk">created_by</span><span class="field-type">uuid FK</span></div>
+                    <div class="field"><span class="field-name">name</span><span class="field-type">varchar(255)</span></div>
+                    <div class="field"><span class="field-name">status</span><span class="field-type">enum</span></div>
+                    <div class="field"><span class="field-name">trigger_type</span><span class="field-type">varchar(50)</span></div>
+                    <div class="field"><span class="field-name">definition</span><span class="field-type">jsonb</span></div>
+                </div>
+            </div>
+
+            <div class="entity">
+                <div class="entity-header workflow">workflow_runs</div>
+                <div class="entity-body">
+                    <div class="field"><span class="field-name pk">id</span><span class="field-type">uuid PK</span></div>
+                    <div class="field"><span class="field-name fk">workflow_id</span><span class="field-type">uuid FK</span></div>
+                    <div class="field"><span class="field-name fk">contact_id</span><span class="field-type">uuid FK</span></div>
+                    <div class="field"><span class="field-name">status</span><span class="field-type">enum</span></div>
+                    <div class="field"><span class="field-name">started_at</span><span class="field-type">timestamp</span></div>
+                    <div class="field"><span class="field-name">completed_at</span><span class="field-type">timestamp</span></div>
+                    <div class="field"><span class="field-name">error</span><span class="field-type">text</span></div>
+                </div>
+            </div>
+
+            <div class="entity">
+                <div class="entity-header workflow">workflow_steps</div>
+                <div class="entity-body">
+                    <div class="field"><span class="field-name pk">id</span><span class="field-type">uuid PK</span></div>
+                    <div class="field"><span class="field-name fk">run_id</span><span class="field-type">uuid FK</span></div>
+                    <div class="field"><span class="field-name">step_type</span><span class="field-type">varchar(50)</span></div>
+                    <div class="field"><span class="field-name">status</span><span class="field-type">enum</span></div>
+                    <div class="field"><span class="field-name">input</span><span class="field-type">jsonb</span></div>
+                    <div class="field"><span class="field-name">output</span><span class="field-type">jsonb</span></div>
+                    <div class="field"><span class="field-name">executed_at</span><span class="field-type">timestamp</span></div>
+                </div>
+            </div>
+
+            <!-- Integration Entities -->
+            <div class="entity">
+                <div class="entity-header integration">integrations</div>
+                <div class="entity-body">
+                    <div class="field"><span class="field-name pk">id</span><span class="field-type">uuid PK</span></div>
+                    <div class="field"><span class="field-name fk">organization_id</span><span class="field-type">uuid FK</span></div>
+                    <div class="field"><span class="field-name">provider</span><span class="field-type">enum</span></div>
+                    <div class="field"><span class="field-name">status</span><span class="field-type">enum</span></div>
+                    <div class="field"><span class="field-name">credentials</span><span class="field-type">jsonb (encrypted)</span></div>
+                    <div class="field"><span class="field-name">field_mapping</span><span class="field-type">jsonb</span></div>
+                    <div class="field"><span class="field-name">last_sync_at</span><span class="field-type">timestamp</span></div>
+                </div>
+            </div>
+
+            <div class="entity">
+                <div class="entity-header integration">sync_logs</div>
+                <div class="entity-body">
+                    <div class="field"><span class="field-name pk">id</span><span class="field-type">uuid PK</span></div>
+                    <div class="field"><span class="field-name fk">integration_id</span><span class="field-type">uuid FK</span></div>
+                    <div class="field"><span class="field-name">direction</span><span class="field-type">enum</span></div>
+                    <div class="field"><span class="field-name">records_synced</span><span class="field-type">integer</span></div>
+                    <div class="field"><span class="field-name">errors</span><span class="field-type">integer</span></div>
+                    <div class="field"><span class="field-name">duration_ms</span><span class="field-type">integer</span></div>
+                    <div class="field"><span class="field-name">created_at</span><span class="field-type">timestamp</span></div>
+                </div>
+            </div>
+
+            <!-- Analytics Entities -->
+            <div class="entity">
+                <div class="entity-header analytics">events</div>
+                <div class="entity-body">
+                    <div class="field"><span class="field-name pk">id</span><span class="field-type">uuid PK</span></div>
+                    <div class="field"><span class="field-name fk">organization_id</span><span class="field-type">uuid FK</span></div>
+                    <div class="field"><span class="field-name fk">user_id</span><span class="field-type">uuid FK</span></div>
+                    <div class="field"><span class="field-name">event_type</span><span class="field-type">varchar(100)</span></div>
+                    <div class="field"><span class="field-name">properties</span><span class="field-type">jsonb</span></div>
+                    <div class="field"><span class="field-name">timestamp</span><span class="field-type">timestamp</span></div>
+                </div>
+            </div>
+
+            <div class="entity">
+                <div class="entity-header analytics">usage_metrics</div>
+                <div class="entity-body">
+                    <div class="field"><span class="field-name pk">id</span><span class="field-type">uuid PK</span></div>
+                    <div class="field"><span class="field-name fk">organization_id</span><span class="field-type">uuid FK</span></div>
+                    <div class="field"><span class="field-name">date</span><span class="field-type">date</span></div>
+                    <div class="field"><span class="field-name">workflows_run</span><span class="field-type">integer</span></div>
+                    <div class="field"><span class="field-name">active_users</span><span class="field-type">integer</span></div>
+                    <div class="field"><span class="field-name">api_calls</span><span class="field-type">integer</span></div>
+                    <div class="field"><span class="field-name">emails_sent</span><span class="field-type">integer</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-color" style="background: #e94560;"></div>
+                <span>Core Entities</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #0f3460;"></div>
+                <span>Workflow Entities</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #533483;"></div>
+                <span>Integration Entities</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #16a085;"></div>
+                <span>Analytics Entities</span>
+            </div>
+            <div class="legend-item">
+                <span class="pk">PK = Primary Key</span>
+            </div>
+            <div class="legend-item">
+                <span class="fk">FK = Foreign Key</span>
+            </div>
+        </div>
+
+        <div class="relationships">
+            <h2>Key Relationships</h2>
+            <div class="relationship">
+                <span class="rel-entity">organizations</span>
+                <span class="rel-type">1 : N</span>
+                <span class="rel-entity">users</span>
+            </div>
+            <div class="relationship">
+                <span class="rel-entity">organizations</span>
+                <span class="rel-type">1 : N</span>
+                <span class="rel-entity">contacts</span>
+            </div>
+            <div class="relationship">
+                <span class="rel-entity">organizations</span>
+                <span class="rel-type">1 : N</span>
+                <span class="rel-entity">workflows</span>
+            </div>
+            <div class="relationship">
+                <span class="rel-entity">workflows</span>
+                <span class="rel-type">1 : N</span>
+                <span class="rel-entity">workflow_runs</span>
+            </div>
+            <div class="relationship">
+                <span class="rel-entity">workflow_runs</span>
+                <span class="rel-type">1 : N</span>
+                <span class="rel-entity">workflow_steps</span>
+            </div>
+            <div class="relationship">
+                <span class="rel-entity">organizations</span>
+                <span class="rel-type">1 : N</span>
+                <span class="rel-entity">integrations</span>
+            </div>
+            <div class="relationship">
+                <span class="rel-entity">integrations</span>
+                <span class="rel-type">1 : N</span>
+                <span class="rel-entity">sync_logs</span>
+            </div>
+            <div class="relationship">
+                <span class="rel-entity">contacts</span>
+                <span class="rel-type">1 : N</span>
+                <span class="rel-entity">workflow_runs</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

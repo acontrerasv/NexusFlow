@@ -1,0 +1,90 @@
+{
+  "project": {
+    "name": "NexusFlow Product",
+    "description": "AI-powered sales automation platform for B2B teams in EMEA",
+    "version": "2.4.1",
+    "repository": "nexusflow/product"
+  },
+  "ai": {
+    "model": "claude-sonnet-4-20250514",
+    "temperature": 0.7,
+    "maxTokens": 8192,
+    "contextWindow": "extended"
+  },
+  "agents": {
+    "directory": ".claude/agents",
+    "autoSelect": true,
+    "selectionRules": ".claude/SELECTION_RULES.md",
+    "defaultAgent": "ai-pm"
+  },
+  "commands": {
+    "directory": ".claude/commands",
+    "prefix": "/"
+  },
+  "skills": {
+    "directory": ".claude/skills",
+    "autoLoad": true
+  },
+  "context": {
+    "autoLoad": [
+      "context/docs/BUSINESS_CONTEXT.md",
+      "context/docs/SERVICE_INDEX.md"
+    ],
+    "maxContextFiles": 20,
+    "indexFiles": [
+      ".claude/COMPONENT_INDEX.md"
+    ]
+  },
+  "templates": {
+    "prd": "context/templates/PRD",
+    "defaultTemplate": "PRD_Template.md"
+  },
+  "paths": {
+    "docs": "context/docs",
+    "data": "context/data",
+    "strategy": "context/strategy",
+    "prds": "context/prds",
+    "tech": "context/tech",
+    "templates": "context/templates"
+  },
+  "company": {
+    "name": "NexusFlow",
+    "domain": "nexusflow.io",
+    "region": "EMEA",
+    "industry": "B2B SaaS",
+    "stage": "Series A"
+  },
+  "integrations": {
+    "github": {
+      "enabled": true,
+      "organization": "nexusflow"
+    },
+    "slack": {
+      "enabled": true,
+      "channels": ["#product-team", "#engineering"]
+    },
+    "notion": {
+      "enabled": false
+    }
+  },
+  "formatting": {
+    "markdown": {
+      "lineWidth": 100,
+      "listStyle": "-"
+    },
+    "code": {
+      "style": "prettier",
+      "tabWidth": 2
+    }
+  },
+  "validation": {
+    "prd": {
+      "required": ["problem", "solution", "metrics", "timeline"],
+      "minSections": 5
+    },
+    "okr": {
+      "maxKeyResults": 5,
+      "requireMetrics": true
+    }
+  }
+}
